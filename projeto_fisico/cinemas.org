@@ -1,0 +1,132 @@
+#+title: Cinemas
+#+PROPERTY: header-args :engine postgresql
+#+PROPERTY: header-args+ :dbhost localhost
+#+PROPERTY: header-args+ :dport 5432
+#+PROPERTY: header-args+ :dbuser ebissoli
+#+PROPERTY: header-args+ :database cinema
+
+
+#+name: cinema-cinema
+#+begin_src sql
+SELECT * FROM CINEMA
+#+end_src
+
+#+RESULTS: cinema-cinema
+| cnpj | end_cep | end_num | cont_email | cont_tele | nome |
+|------+---------+---------+------------+-----------+------|
+
+#+name: cinema-funcionario
+#+begin_src sql
+SELECT * FROM FUNCIONARIO
+#+end_src
+
+#+RESULTS: cinema-funcionario
+| cpf | nome | funcao | cnpj | gerente |
+|-----+------+--------+------+---------|
+
+
+#+name: cinema-sala
+#+begin_src sql
+SELECT * FROM SALA
+#+end_src
+
+#+RESULTS: cinema-sala
+| numero | tipo | capacidade | cnpj |
+|--------+------+------------+------|
+
+#+name: cinema-sessao
+#+begin_src sql
+SELECT * FROM SESSAO
+#+end_src
+
+#+RESULTS: cinema-sessao
+| horario | idioma | tipo | numero | cnpj | titulo |
+|---------+--------+------+--------+------+--------|
+
+
+#+name: cinema-filme
+#+begin_src sql
+SELECT * FROM FILME
+#+end_src
+
+#+RESULTS: cinema-filme
+| titulo | faixaetaria | duracao |
+|--------+-------------+---------|
+
+
+#+name: cinema-generos
+#+begin_src sql
+SELECT * FROM GENERO
+#+end_src
+
+#+RESULTS: cinema-generos
+| gen | titulo |
+|-----+--------|
+
+
+#+name: cinema-ASSOCIADO
+#+begin_src sql
+SELECT * FROM ASSOCIADO
+#+end_src
+
+#+RESULTS: cinema-ASSOCIADO
+| acesso | codigo | numero | cnpj | horario |
+|--------+--------+--------+------+---------|
+
+
+#+name: cinema-INGRESSO
+#+begin_src sql
+SELECT * FROM INGRESSO
+#+end_src
+
+#+RESULTS: cinema-INGRESSO
+| codigo | preco |
+|--------+-------|
+
+#+name: cinema-consumivel
+#+begin_src sql
+SELECT * FROM CONSUMIVEL
+    #+end_src
+
+    #+RESULTS: cinema-consumivel
+    | codigo | preco | tamanho | tipo | nome |
+    |--------+-------+---------+------+------|
+
+
+#+name: cinema-cliente
+#+begin_src sql
+SELECT * FROM CLIENTE
+    #+end_src
+
+    #+RESULTS: cinema-cliente
+    | cpf | nome |
+    |-----+------|
+
+
+#+name: cinema-cupom
+#+begin_src sql
+SELECT * FROM CUPOM
+    #+end_src
+
+    #+RESULTS: cinema-cupom
+    | idcupom | tipo | valor |
+    |---------+------+-------|
+
+
+#+name: cinema-compra_ing
+#+begin_src sql
+SELECT * FROM COMPRA_ING
+    #+end_src
+
+    #+RESULTS: cinema-compra_ing
+    | compra_ing | idcupom | cpf | codigo | qtd |
+    |------------+---------+-----+--------+-----|
+
+#+name: cinema-compra_consu
+#+begin_src sql
+SELECT * FROM COMPRA_CONSU
+    #+end_src
+
+    #+RESULTS: cinema-compra_consu
+    | compra_consu | idcupom | cpf | codigo | qtd |
+    |--------------+---------+-----+--------+-----|
