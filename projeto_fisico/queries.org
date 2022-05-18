@@ -1,0 +1,193 @@
+#+title: Queries
+#+PROPERTY: header-args :engine postgresql
+#+PROPERTY: header-args+ :dbhost localhost
+#+PROPERTY: header-args+ :dport 5432
+#+PROPERTY: header-args+ :dbuser ebissoli
+#+PROPERTY: header-args+ :database cinema
+
+* Cinema queries
+    Quantos cinemas existem no db que comecam com os dois primeiros digitos do cnpj entre 30-50?
+   #+begin_src sql
+    SELECT COUNT(1)
+           FROM CINEMA AS c
+           WHERE c.cnpj ~ '^3\d|^4\d|^50'
+   #+end_src
+
+   #+RESULTS:
+   | count |
+   |-------|
+   |     3 |
+
+   Quantos cinemas terminam o numero de telefone com o mesmo digito?
+  #+begin_src sql
+    CREATE FUNCTION endPhoneDig(endnum integer)
+           RETURNS varchar(14) -- digito de phone final
+           LANGUAGE plpgsql
+        AS
+    $$
+    DECLARE
+        dig varchar(14);
+    BEGIN
+        SELECT cont_tele
+        INTO dig
+               FROM CINEMA AS c
+               WHERE c.cont_tele ~ ($1 || '$');
+
+        RETURN dig;
+    END;
+    $$;
+
+  #+end_src
+
+  #+RESULTS:
+  | CREATE FUNCTION |
+  |-----------------|
+
+ #+begin_src sql
+DROP FUNCTION endPhoneDig
+ #+end_src
+
+ #+RESULTS:
+ | DROP FUNCTION |
+ |---------------|
+
+ #+begin_src sql
+    SELECT * FROM endPhoneDig('4');
+ #+end_src
+
+ #+RESULTS:
+ |---|
+
+update email based on business rule
+#+begin_src sql
+UPDATE CINEMA AS c -- setar emailpadrao para contas especificas
+       SET end_num = '9999', cont_email = 'cinema.default.@gmail.com'
+        WHERE c.cnpj ~ '^4\d';
+SELECT cont_email, end_num
+        FROM CINEMA;
+#+end_src
+
+#+RESULTS:
+| UPDATE 0   |         |
+|------------+---------|
+| cont_email | end_num |
+
+#+begin_src sql
+DELETE
+       FROM CINEMA AS c;
+            WHERE c.end_cep ~ '7$';
+SELECT end_cep
+         FROM CINEMA
+#+end_src
+
+#+RESULTS:
+| DELETE 0 |
+|----------|
+
+#+begin_src sql
+SELECT end_num
+       FROM CINEMA AS c
+            WHERE cast(c.end_num as varchar(18)) ~ '^6'; -- casting feature
+#+end_src
+
+#+RESULTS:
+| end_num |
+|---------|
+|    6665 |
+|    6693 |
+|    6440 |
+|    6400 |
+|    6740 |
+|    6665 |
+|    6566 |
+
+#+begin_src sql
+SELECT COUNT(1)
+       FROM CINEMA AS c
+            WHERE c.cont_email ~ 'apple.com$';
+#+end_src
+
+#+RESULTS:
+| count |
+|-------|
+|     2 |
+
+#+begin_src sql
+SELECT DISTINCT cont_tele -- unique phone numbers
+        FROM CINEMA AS c
+#+end_src
+
+#+RESULTS:
+|    cont_tele |
+|--------------|
+| +81941111010 |
+| +81918889258 |
+| +81966115634 |
+| +81932063896 |
+| +81976766884 |
+| +81973747382 |
+| +81986333488 |
+| +81960496512 |
+| +81919189118 |
+| +81921111745 |
+| +81999989118 |
+| +81957501125 |
+| +81919889158 |
+| +81995676688 |
+| +81907000000 |
+| +81923363132 |
+| +81946333488 |
+| +81932038964 |
+| +81981754729 |
+| +81929859031 |
+| +81941210109 |
+| +81995353394 |
+| +81966676688 |
+| +81940661730 |
+| +81967459643 |
+| +81953755256 |
+| +81936118583 |
+| +81919989158 |
+| +81975117560 |
+| +81900000000 |
+
+#+begin_src sql
+SELECT cnpj, cont_email -- projection of two fields
+       FROM CINEMA AS c LIMIT 10;
+#+end_src
+
+#+RESULTS:
+| cnpj              | cont_email                      |
+|-------------------+---------------------------------|
+| 20.244.470/291-43 | cinema.perez-stokes@apple.com   |
+| 56.364.755/741-96 | cinema.chandler@baidu.com       |
+| 22.717.803/901-18 | cinema.powell@gmail.com         |
+| 08.445.373/381-68 | cinema.reynolds@gmail.com       |
+| 83.638.636/221-83 | cinema.bush@gmail.com           |
+| 26.111.438/081-43 | cinema.wheeler@moz.com          |
+| 61.759.847/271-40 | cinema.valenzuela@buzz.com      |
+| 96.971.866/191-25 | cinema.smith@baidu.com          |
+| 55.459.555/401-85 | cinema.hall@buzz.com            |
+| 37.373.353/391-53 | cinema.shepherd-allen@gmail.com |
+
+* Sala queries
+
+* Sessao queries
+
+* Filme queries
+
+* Genero queries
+
+* Ingresso queries
+
+* Consumivel queries
+
+* Cliente queries
+
+* Cupom queries
+
+* Compra_ing queries
+
+* Comra_consu queries
+
+* SQL transactions hook

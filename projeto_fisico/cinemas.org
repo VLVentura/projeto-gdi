@@ -9,15 +9,28 @@
 #+name: cinema-cinema
 #+begin_src sql
 SELECT * FROM CINEMA
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-cinema
-| cnpj | end_cep | end_num | cont_email | cont_tele | nome |
-|------+---------+---------+------------+-----------+------|
+| cnpj              |   end_cep | end_num | cont_email                        |    cont_tele | nome                  |
+|-------------------+-----------+---------+-----------------------------------+--------------+-----------------------|
+| 48.498.751/001-88 | 44895-210 |    6633 | cinema.humphrey@baidu.com         | +81925350570 | Cinema Humphrey       |
+| 10.712.767/551-56 | 21519-431 |    3240 | cinema.smith@outlook.info         | +81999566669 | Cinema Smith          |
+| 39.334.613/631-70 | 43594-312 |    5455 | cinema.watkins-kane@gmail.info    | +81947715018 | Cinema Watkins-Kane   |
+| 34.464.539/971-93 | 63594-312 |     914 | cinema.dennis-mendoza@outlook.com | +81900836790 | Cinema Dennis-Mendoza |
+| 96.503.291/111-26 | 88008-248 |    4444 | cinema.stone@apple.com            | +81991269561 | Cinema Stone          |
+| 52.842.179/581-85 | 47895-210 |    9298 | cinema.garcia-pierce@moz.org      | +81919531879 | Cinema Garcia-Pierce  |
+| 14.498.075/101-08 | 23519-431 |    8636 | cinema.carpenter@gmail.com        | +81991958834 | Cinema Carpenter      |
+| 16.207.965/101-37 | 44495-213 |    8333 | cinema.ortiz@gmail.com            | +81907925476 | Cinema Ortiz          |
+| 76.315.469/751-24 | 33322-057 |    1111 | cinema.webb@baidu.org             | +81935381829 | Cinema Webb           |
+| 93.366.762/831-32 | 30400-037 |    9229 | cinema.fernandez@gmail.com        | +81973888888 | Cinema Fernandez      |
+
 
 #+name: cinema-funcionario
 #+begin_src sql
 SELECT * FROM FUNCIONARIO
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-funcionario
@@ -28,105 +41,226 @@ SELECT * FROM FUNCIONARIO
 #+name: cinema-sala
 #+begin_src sql
 SELECT * FROM SALA
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-sala
-| numero | tipo | capacidade | cnpj |
-|--------+------+------------+------|
+| numero | tipo    | capacidade | cnpj              |
+|--------+---------+------------+-------------------|
+|     42 | Premium |         96 | 48.498.751/001-88 |
+|     82 | Vanilla |        235 | 10.712.767/551-56 |
+|     13 | Comfort |        247 | 39.334.613/631-70 |
+|      8 | Premium |         40 | 34.464.539/971-93 |
+|     37 | Basic   |        119 | 96.503.291/111-26 |
+|     13 | Vanilla |         86 | 52.842.179/581-85 |
+|     59 | Comfort |         55 | 14.498.075/101-08 |
+|     73 | Basic   |         44 | 16.207.965/101-37 |
+|     18 | Comfort |        153 | 76.315.469/751-24 |
+|     77 | Premium |        210 | 93.366.762/831-32 |
 
 #+name: cinema-sessao
 #+begin_src sql
 SELECT * FROM SESSAO
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-sessao
-| horario | idioma | tipo | numero | cnpj | titulo |
-|---------+--------+------+--------+------+--------|
+| horario                    | idioma    | tipo    | numero | cnpj              | titulo                   |
+|----------------------------+-----------+---------+--------+-------------------+--------------------------|
+| 2022-05-22 14:03:49.065563 | Chines    | Premium |     42 | 48.498.751/001-88 | Robot Discard Person     |
+| 2022-05-29 00:11:00.658187 | Portugues | Vanilla |     82 | 10.712.767/551-56 | Alien Destroy Place      |
+| 2022-05-22 10:35:41.19947  | Alemao    | Comfort |     13 | 39.334.613/631-70 | Death Discard Party      |
+| 2022-05-20 23:28:47.764398 | Italiano  | Premium |      8 | 34.464.539/971-93 | Hero Experience Person   |
+| 2022-05-18 07:37:49.000324 | Chines    | Basic   |     37 | 96.503.291/111-26 | Brazil Sit World         |
+| 2022-06-02 10:01:01.723712 | Ingles    | Vanilla |     13 | 52.842.179/581-85 | Alien Return Party       |
+| 2022-06-04 01:00:27.209153 | Frances   | Comfort |     59 | 14.498.075/101-08 | Life Die People          |
+| 2022-05-25 00:07:49.000324 | Espanol   | Basic   |     73 | 16.207.965/101-37 | Existence Explode Europe |
+| 2022-05-25 00:50:49.000348 | Alemao    | Comfort |     18 | 76.315.469/751-24 | War Find Asia            |
+| 2022-05-29 00:12:20.330876 | Portugues | Premium |     77 | 93.366.762/831-32 | Survival Act Place       |
 
 
 #+name: cinema-filme
 #+begin_src sql
 SELECT * FROM FILME
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-filme
-| titulo | faixaetaria | duracao |
-|--------+-------------+---------|
+| titulo                   | faixaetaria |         duracao |
+|--------------------------+-------------+-----------------|
+| Robot Discard Person     | T           | 02:08:39.593805 |
+| Alien Destroy Place      | M           | 01:49:02.292529 |
+| Death Discard Party      | R           | 02:12:43.723459 |
+| Hero Experience Person   | M           | 02:19:10.635875 |
+| Brazil Sit World         | E           | 02:40:28.693139 |
+| Alien Return Party       | T           | 02:26:01.265505 |
+| Life Die People          | R           | 02:06:46.564914 |
+| Existence Explode Europe | R           | 02:44:37.205882 |
+| War Find Asia            | M           | 02:25:55.858882 |
+| Survival Act Place       | T           | 01:32:12.033843 |
 
 
 #+name: cinema-generos
 #+begin_src sql
 SELECT * FROM GENERO
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-generos
-| gen | titulo |
-|-----+--------|
+| genero      | titulo                   |
+|-------------+--------------------------|
+| Terror      | Robot Discard Person     |
+| Super Heroi | Alien Destroy Place      |
+| Terror      | Death Discard Party      |
+| Acao        | Hero Experience Person   |
+| Terror      | Brazil Sit World         |
+| Romance     | Alien Return Party       |
+| Terror      | Life Die People          |
+| Remake      | Existence Explode Europe |
+| Ficcao      | War Find Asia            |
+| Comedia     | Survival Act Place       |
 
 
 #+name: cinema-ASSOCIADO
 #+begin_src sql
 SELECT * FROM ASSOCIADO
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-ASSOCIADO
-| acesso | codigo | numero | cnpj | horario |
-|--------+--------+--------+------+---------|
+| acesso                     | codigo | numero | cnpj              | horario                    |
+|----------------------------+--------+--------+-------------------+----------------------------|
+| 2022-05-22 15:43:04.268106 | 773537 |     42 | 48.498.751/001-88 | 2022-05-22 14:03:49.065563 |
+| 2022-05-29 02:00:00.000291 | 000000 |     82 | 10.712.767/551-56 | 2022-05-29 00:11:00.658187 |
+| 2022-05-22 10:39:06.393545 | 991951 |     13 | 39.334.613/631-70 | 2022-05-22 10:35:41.19947  |
+| 2022-05-21 00:23:01.065994 | 688888 |      8 | 34.464.539/971-93 | 2022-05-20 23:28:47.764398 |
+| 2022-05-18 08:01:01.197377 | 112853 |     37 | 96.503.291/111-26 | 2022-05-18 07:37:49.000324 |
+| 2022-06-02 12:03:54.231113 | 059551 |     13 | 52.842.179/581-85 | 2022-06-02 10:01:01.723712 |
+| 2022-06-04 01:00:27.209164 | 121227 |     59 | 14.498.075/101-08 | 2022-06-04 01:00:27.209153 |
+| 2022-05-25 01:01:33.065879 | 666998 |     73 | 16.207.965/101-37 | 2022-05-25 00:07:49.000324 |
+| 2022-05-25 01:23:29.065822 | 676744 |     18 | 76.315.469/751-24 | 2022-05-25 00:50:49.000348 |
+| 2022-05-29 01:01:30.437872 | 125169 |     77 | 93.366.762/831-32 | 2022-05-29 00:12:20.330876 |
 
 
 #+name: cinema-INGRESSO
 #+begin_src sql
 SELECT * FROM INGRESSO
+LIMIT 10
 #+end_src
 
 #+RESULTS: cinema-INGRESSO
-| codigo | preco |
-|--------+-------|
+| codigo |     preco |
+|--------+-----------|
+| 773537 | 27.972786 |
+| 000000 | 23.416632 |
+| 991951 |  66.27622 |
+| 688888 | 48.387936 |
+| 112853 |  31.42645 |
+| 059551 |   31.3317 |
+| 121227 | 39.965706 |
+| 666998 |  61.30051 |
+| 676744 | 38.090637 |
+| 125169 |   66.6483 |
 
 #+name: cinema-consumivel
 #+begin_src sql
 SELECT * FROM CONSUMIVEL
+LIMIT 30
     #+end_src
 
     #+RESULTS: cinema-consumivel
-    | codigo | preco | tamanho | tipo | nome |
-    |--------+-------+---------+------+------|
+    | codigo |     preco | tamanho     | tipo         | nome |
+    |--------+-----------+-------------+--------------+------|
+    | 725169 |  67.12176 | GRANDE      | PIPOCA       | null |
+    | 666434 |  60.67287 | MEDIO       | SALGADO      | null |
+    | 969980 |  63.22021 | PEQUENO     | SODA         | null |
+    | 106627 | 23.025043 | MEDIO       | REFRIGERANTE | null |
+    | 274806 |  62.44869 | PEQUENO     | CAFE         | null |
+    | 919511 | 27.180458 | EXTRAGRANDE | CAFE         | null |
+    | 649981 |  42.96031 | GRANDE      | REFRIGERANTE | null |
+    | 353537 | 40.413837 | MEDIO       | REFRIGERANTE | null |
+    | 099551 |  62.80192 | PEQUENO     | SUCO         | null |
+    | 264606 | 24.221922 | GRANDE      | REFRIGERANTE | null |
 
 
 #+name: cinema-cliente
 #+begin_src sql
 SELECT * FROM CLIENTE
+LIMIT 10
     #+end_src
 
     #+RESULTS: cinema-cliente
-    | cpf | nome |
-    |-----+------|
+    |            cpf | nome              |
+    |----------------+-------------------|
+    | 330.399.745-30 | Elizabeth da Mota |
+    | 482.841.424-48 | Sabrina Cardoso   |
+    | 810.803.176-02 | Stephany da Costa |
+    | 384.686.533-15 | Ryan Ramsey       |
+    | 060.244.036-33 | Melissa Campos    |
+    | 379.084.716-49 | Melissa Edwards   |
+    | 799.249.207-28 | Matthew Cardoso   |
+    | 884.208.109-65 | Stephany Cardoso  |
+    | 438.611.963-74 | Stephen Harvey    |
+    | 192.995.489-89 | Ryan Cardoso      |
 
 
 #+name: cinema-cupom
 #+begin_src sql
 SELECT * FROM CUPOM
+LIMIT 10
     #+end_src
 
     #+RESULTS: cinema-cupom
-    | idcupom | tipo | valor |
-    |---------+------+-------|
+    | idcupom | tipo        |     valor |
+    |---------+-------------+-----------|
+    |    3819 | SABADO      | 23.559505 |
+    |    5856 | DOMINGOU    |  26.31734 |
+    |    6454 | PREMIADO    |  17.23595 |
+    |    1181 | DOMINGOU    | 21.580328 |
+    |    6666 | PREMIADO    |  23.74004 |
+    |    0204 | TERCAOLOUCA |  25.77723 |
+    |    4495 | SENIOR      | 15.077172 |
+    |    7427 | ESTUDANTE   |  29.30269 |
+    |    4443 | SABADO      |        10 |
+    |    8856 | SEXTOU      | 23.908024 |
 
 
 #+name: cinema-compra_ing
 #+begin_src sql
 SELECT * FROM COMPRA_ING
+LIMIT 10
     #+end_src
 
     #+RESULTS: cinema-compra_ing
-    | compra_ing | idcupom | cpf | codigo | qtd |
-    |------------+---------+-----+--------+-----|
+    | compra_ing                 | idcupom |            cpf | codigo | qtd |
+    |----------------------------+---------+----------------+--------+-----|
+    | 2022-05-20 04:00:04.527876 |    3819 | 330.399.745-30 | 773537 |  53 |
+    | 2022-05-24 00:00:00        |    5856 | 482.841.424-48 | 000000 |  51 |
+    | 2022-05-22 09:47:02.263425 |    6454 | 810.803.176-02 | 991951 |  26 |
+    | 2022-05-20 20:12:33.000364 |    1181 | 384.686.533-15 | 688888 |  52 |
+    | 2022-05-11 04:30:30.131588 |    6666 | 060.244.036-33 | 112853 |  75 |
+    | 2022-05-31 16:39:56.373759 |    0204 | 379.084.716-49 | 059551 |  30 |
+    | 2022-05-26 06:01:00.002384 |    4495 | 799.249.207-28 | 121227 |  88 |
+    | 2022-05-24 06:58:30.820278 |    7427 | 884.208.109-65 | 666998 |  64 |
+    | 2022-05-19 07:53:08.00007  |    4443 | 438.611.963-74 | 676744 |   4 |
+    | 2022-05-27 00:01:28.655499 |    8856 | 192.995.489-89 | 125169 |  21 |
 
 #+name: cinema-compra_consu
 #+begin_src sql
 SELECT * FROM COMPRA_CONSU
+LIMIT 10
     #+end_src
 
     #+RESULTS: cinema-compra_consu
-    | compra_consu | idcupom | cpf | codigo | qtd |
-    |--------------+---------+-----+--------+-----|
+    | compra_consu               | idcupom |            cpf | codigo | qtd |
+    |----------------------------+---------+----------------+--------+-----|
+    | 2022-05-11 12:39:04.424035 |    3819 | 330.399.745-30 | 725169 |  54 |
+    | 2022-05-28 00:10:08.000336 |    5856 | 482.841.424-48 | 666434 |  60 |
+    | 2022-05-16 19:08:41.53455  |    6454 | 810.803.176-02 | 969980 |   0 |
+    | 2022-05-12 01:03:31.933662 |    1181 | 384.686.533-15 | 106627 |  61 |
+    | 2022-05-13 01:37:10.467207 |    6666 | 060.244.036-33 | 274806 |  50 |
+    | 2022-06-02 09:59:33.620338 |    0204 | 379.084.716-49 | 919511 |  48 |
+    | 2022-06-03 11:15:07.721163 |    4495 | 799.249.207-28 | 649981 |  92 |
+    | 2022-05-24 03:00:01.197105 |    7427 | 884.208.109-65 | 353537 |  70 |
+    | 2022-05-24 09:43:09.727819 |    4443 | 438.611.963-74 | 099551 |  43 |
+    | 2022-05-29 00:07:51.614245 |    8856 | 192.995.489-89 | 264606 |  55 |
