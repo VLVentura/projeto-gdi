@@ -170,6 +170,161 @@ SELECT cnpj, cont_email -- projection of two fields
 | 55.459.555/401-85 | cinema.hall@buzz.com            |
 | 37.373.353/391-53 | cinema.shepherd-allen@gmail.com |
 
+Fazer query que diz maior end_num
+#+begin_src sql
+SELECT MAX(end_num), c.cnpj
+        FROM CINEMA AS c
+        GROUP BY c.cnpj -- find for the group thing, so for the specified field, what is the max? Because field is PK this makes no sense
+#+end_src
+
+#+RESULTS:
+|  max | cnpj              |
+|------+-------------------|
+| 4444 | 38.991.414/871-20 |
+| 9999 | 81.671.482/931-78 |
+| 9932 | 12.999.149/461-45 |
+| 8874 | 26.111.438/081-43 |
+| 6665 | 22.717.803/901-18 |
+| 6566 | 72.286.957/151-06 |
+| 3233 | 33.494.659/661-52 |
+| 5763 | 08.559.055/001-54 |
+| 7766 | 98.311.622/481-47 |
+| 9108 | 00.000.000/001-00 |
+| 5808 | 44.648.396/801-58 |
+| 6665 | 89.596.554/081-51 |
+| 4443 | 47.179.929/771-74 |
+| 1811 | 55.459.555/401-85 |
+| 6693 | 08.445.373/381-68 |
+| 5595 | 96.971.866/191-25 |
+| 6440 | 61.759.847/271-40 |
+| 3353 | 43.668.636/521-49 |
+| 2322 | 83.638.636/221-83 |
+| 7799 | 20.244.470/291-43 |
+| 7777 | 56.364.755/741-96 |
+|    0 | 69.963.638/641-28 |
+| 7328 | 38.791.414/871-20 |
+| 6400 | 29.725.191/811-76 |
+| 5665 | 69.495.156/191-60 |
+| 8881 | 37.373.353/391-53 |
+| 5544 | 89.522.601/481-41 |
+| 4442 | 14.276.977/121-35 |
+| 6740 | 67.621.268/471-81 |
+| 7676 | 48.179.729/731-34 |
+
+#+begin_src sql
+SELECT end_num -- filter above
+        FROM CINEMA AS c
+        WHERE c.end_num > 300 LIMIT 10;
+#+end_src
+
+#+RESULTS:
+| end_num |
+|---------|
+|    7799 |
+|    7777 |
+|    6665 |
+|    6693 |
+|    2322 |
+|    8874 |
+|    6440 |
+|    5595 |
+|    1811 |
+|    8881 |
+
+#+begin_src sql
+SELECT end_num
+       FROM CINEMA AS c
+       WHERE c.end_num BETWEEN 4000 AND 7000 LIMIT 10;
+#+end_src
+
+#+RESULTS:
+| end_num |
+|---------|
+|    6665 |
+|    6693 |
+|    6440 |
+|    5595 |
+|    4442 |
+|    4444 |
+|    5665 |
+|    6400 |
+|    6740 |
+|    5544 |
+
+#+begin_src sql
+SELECT *
+        FROM CINEMA AS c
+        WHERE c.end_num in (7777, 6665) LIMIT 10;
+#+end_src
+
+#+begin_src sql
+SELECT *
+       FROM CINEMA AS c
+       WHERE c.cont_email ~ 'perez.+com$|perez.+info$' LIMIT 10; -- find by regexp
+#+end_src
+#+RESULTS:
+| cnpj              |   end_cep | end_num | cont_email                    |    cont_tele | nome                |
+|-------------------+-----------+---------+-------------------------------+--------------+---------------------|
+| 20.244.470/291-43 | 19938-911 |    7799 | cinema.perez-stokes@apple.com | +81975117560 | Cinema Perez-Stokes |
+
+#+begin_src sql
+SELECT *
+       FROM CINEMA AS c
+       WHERE c.cont_tele IS NULL OR end_num = '7799' LIMIT 10;
+#+end_src
+
+#+RESULTS:
+| cnpj              |   end_cep | end_num | cont_email                    |    cont_tele | nome                |
+|-------------------+-----------+---------+-------------------------------+--------------+---------------------|
+| 20.244.470/291-43 | 19938-911 |    7799 | cinema.perez-stokes@apple.com | +81975117560 | Cinema Perez-Stokes |
+
+
+#+begin_src sql
+-- CREATE VIEW upper_naming AS
+-- SELECT cont_email
+--         FROM CINEMA AS c;
+UPDATE upper_naming
+    SET cont_email = upper(cont_email);
+SELECT cont_email
+        FROM CINEMA AS c; -- create view to no alter default data
+
+#+end_src
+
+#+RESULTS:
+| UPDATE 30                        |
+|----------------------------------|
+| cont_email                       |
+| CINEMA.PEREZ-STOKES@APPLE.COM    |
+| CINEMA.CHANDLER@BAIDU.COM        |
+| CINEMA.POWELL@GMAIL.COM          |
+| CINEMA.REYNOLDS@GMAIL.COM        |
+| CINEMA.BUSH@GMAIL.COM            |
+| CINEMA.WHEELER@MOZ.COM           |
+| CINEMA.VALENZUELA@BUZZ.COM       |
+| CINEMA.SMITH@BAIDU.COM           |
+| CINEMA.HALL@BUZZ.COM             |
+| CINEMA.SHEPHERD-ALLEN@GMAIL.COM  |
+| CINEMA.CLARK-HAYNES@GMAIL.COM    |
+| CINEMA.LEWIS@OUTLOOK.INFO        |
+| CINEMA.WILLIAMS@APPLE.INFO       |
+| CINEMA.BOWMAN-ROSS@MOZ.COM       |
+| CINEMA.FREY@GMAIL.COM            |
+| CINEMA.RAMSEY@OUTLOOK.COM        |
+| CINEMA.ODONNELL@MOZ.COM          |
+| CINEMA.LEWIS@APPLE.COM           |
+| CINEMA.GONZALES@BUZZ.COM         |
+| CINEMA.BROWN@OUTLOOK.ORG         |
+| CINEMA.DOMINGUEZ-EVANS@BUZZ.NET  |
+| CINEMA.SMITH-LANG@GMAIL.BIZ      |
+| CINEMA.YANG@MOZ.COM              |
+| CINEMA.CAIN@APPLE.ORG            |
+| CINEMA.WATSON-SMITH@BAIDU.NET    |
+| CINEMA.GOLDEN@OUTLOOK.COM        |
+| CINEMA.GRIFFIN-GUZMAN@GMAIL.INFO |
+| CINEMA.MONTES@BAIDU.COM          |
+| CINEMA.FRAZIER@OUTLOOK.COM       |
+| CINEMA.GALLAGHER@BUZZ.COM        |
+
 * Sala queries
 
 * Sessao queries
